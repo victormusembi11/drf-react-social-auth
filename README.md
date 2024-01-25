@@ -2,7 +2,7 @@
 
 social auth docs - [https://drf-social-oauth2.readthedocs.io/en/latest/index.html]
 
-yt video - https://www.youtube.com/watch?v=wlcCvzOLL8w
+yt video - <https://www.youtube.com/watch?v=wlcCvzOLL8w>
 
 ## Setup
 
@@ -15,6 +15,8 @@ python3 -m venv venv
 ```bash
 source venv/bin/activate
 ```
+
+create a .env file in the root directory and add the content in .env.example file to it
 
 ```bash
 pip install -r requirements.txt
