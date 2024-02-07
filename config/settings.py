@@ -44,10 +44,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third-Party Apps
     "rest_framework",
+    "rest_framework_simplejwt", # package used for JWT authentication
     "corsheaders",
     "oauth2_provider",
     "social_django",
-    "drf_social_oauth2",
+    "rest_social_auth", # package used for social authentication
     # Local Apps
     "core",
 ]
@@ -150,6 +151,7 @@ REST_FRAMEWORK = {
         # 'oauth2_provider.ext.rest_framework.OAuth2Authentication',  # django-oauth-toolkit < 1.0.0
         "oauth2_provider.contrib.rest_framework.OAuth2Authentication",  # django-oauth-toolkit >= 1.0.0
         "drf_social_oauth2.authentication.SocialAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
 }
 
@@ -160,19 +162,22 @@ AUTHENTICATION_BACKENDS = (
     # Others auth providers (e.g. Facebook, OpenId, etc)
     # Google  OAuth2
     "social_core.backends.google.GoogleOAuth2",
+    # Facebook OAuth2
+    "social_core.backends.facebook.FacebookOAuth2",
     # drf-social-oauth2
     "drf_social_oauth2.backends.DjangoOAuth2",
     # Django
     "django.contrib.auth.backends.ModelBackend",
 )
 
-# Google configuration
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_OAUTH2_KEY")
+# Facebook configartion
+# From facebook developer console
+# TODO: Change the values with your app details or use enviromental variables
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("GOOGLE_OAUTH2_SECRET")
+SOCIAL_AUTH_FACEBOOK_KEY = "924328569078395"
+SOCIAL_AUTH_FACEBOOK_SECRET = "ffd648501949957eca39de53c2f7731f"
 
-# Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
-    "https://www.googleapis.com/auth/userinfo.email",
-    "https://www.googleapis.com/auth/userinfo.profile",
-]
+# Social auth configaration
+REST_SOCIAL_OAUTH_REDIRECT_URI = "http://127.0.0.1:3000/"
+REST_SOCIAL_DOMAIN_FROM_ORIGIN = True
+REST_SOCIAL_LOG_AUTH_EXCEPTIONS = False
