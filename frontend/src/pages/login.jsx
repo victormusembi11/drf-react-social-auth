@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 
 import { HandleGoogleLogin } from "../axios/google-login";
-import { axiosInstance } from "../axios/login";
+import { axiosInstance } from "../axios/axios";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({
