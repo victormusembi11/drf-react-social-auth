@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { axiosInstanceAuth } from "./axios/login";
+import { axiosInstanceAuth } from "./axios/axios";
 
 function App() {
   const [users, setUsers] = useState([]);
