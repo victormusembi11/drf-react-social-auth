@@ -156,23 +156,4 @@ REST_FRAMEWORK = {
 
 CORS_ALLOW_ALL_ORIGINS: bool = True
 
-AUTHENTICATION_BACKENDS = (
-    # Others auth providers (e.g. Facebook, OpenId, etc)
-    # Google  OAuth2
-    "social_core.backends.google.GoogleOAuth2",
-    # drf-social-oauth2
-    "drf_social_oauth2.backends.DjangoOAuth2",
-    # Django
-    "django.contrib.auth.backends.ModelBackend",
-)
-
-# Google configuration
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_OAUTH2_KEY")
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("GOOGLE_OAUTH2_SECRET")
-
-# Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
-    "https://www.googleapis.com/auth/userinfo.email",
-    "https://www.googleapis.com/auth/userinfo.profile",
-]
+from config.social_auth import *  # noqa
