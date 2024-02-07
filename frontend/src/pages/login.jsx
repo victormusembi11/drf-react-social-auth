@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { axiosInstance } from "../axios/login";
-
 export default function Login() {
 
   const urlParams = new URLSearchParams(window.location.search);
