@@ -56,6 +56,9 @@ export default function Login() {
         submit
       </button>
       <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+      <a href="https://www.facebook.com/v19.0/dialog/oauth?client_id=906353464279347&redirect_uri=http://localhost:3002/&state={facebook}&response_type=token">
+        Login with Facebook
+      </a>
     </form>
   );
 }
