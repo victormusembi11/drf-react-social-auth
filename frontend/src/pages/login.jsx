@@ -1,14 +1,19 @@
+import React from "react";
 import { useState } from "react";
-import { GoogleLogin } from "@react-oauth/google";
-
-import { HandleGoogleLogin } from "../axios/google-login";
 import { axiosInstance } from "../axios/login";
 
 export default function Login() {
+
+  const urlParams = new URLSearchParams(window.location.search);
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
+
+  // Get the values of 'code' and 'state' parameters
+  const code = urlParams.get('code');
+  const provider = urlParams.get('state');
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -19,43 +24,30 @@ export default function Login() {
     }));
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-
+  async function handleFacebookSubmit(e) {
+    e.preventDefault()
     try {
-      const response = await axiosInstance.post("/auth/token/", {
-        username: credentials.username,
-        password: credentials.password,
-        grant_type: "password",
-        client_id:
-          "541785145737-n1a0n0e914ipg2ug6oliop4ro19f78q2.apps.googleusercontent.com",
-        client_secret: "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",
+      const response = await axiosInstance.post("/api/login/social/jwt-pair/", {
+        code: code,
+        provider: provider,
       });
-      console.log(response.data);
-      localStorage.setItem("access_token", response.data.access_token);
-      localStorage.setItem("refresh_token", response.data.refresh_token);
+      console.log(response.data)
     } catch (error) {
-      console.log(error);
+     console.log(error) 
     }
   }
-
-  const responseMessage = (response) => {
-    console.log(response);
-    HandleGoogleLogin(response.credential);
-  };
-
-  const errorMessage = (error) => {
-    console.log(error);
-  };
 
   return (
     <form>
       <input type="text" name="username" onChange={handleChange} />
       <input type="text" name="password" onChange={handleChange} />
-      <button type="submit" onClick={handleSubmit}>
+      <button type="submit" onClick={handleFacebookSubmit}>
         submit
       </button>
-      <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+      <a href="https://www.facebook.com/v19.0/dialog/oauth?client_id=924328569078395&redirect_uri=http://localhost:3000/&state={facebook}">
+        Login with Facebook
+      </a>
+      <button type="submit" onSubmit={handleFacebookSubmit}>login with facebook</button>
     </form>
   );
 }
