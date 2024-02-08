@@ -24,7 +24,7 @@ export default function AuthCheck() {
           }
         );
 
-        console.log("Token converted: ", res.data);
+        localStorage.setItem("token", res.data.access_token);
 
         navigate("/dashboard");
       } catch (error) {
