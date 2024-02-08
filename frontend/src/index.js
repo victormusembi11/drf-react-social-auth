@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./pages/home";
-import reportWebVitals from "./reportWebVitals";
-import Login from "./pages/login";
-import Dashboard from "./pages/dashboard";
-import Nav from "./components/nav";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+
+import Nav from "./components/nav";
+import App from "./pages/home";
+import Login from "./pages/login";
+import AuthCheck from "./pages/auth-check";
+import Dashboard from "./pages/dashboard";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,10 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/auth-check",
+    element: <AuthCheck />,
+  },
+  {
     path: "/dashboard",
     element: <Dashboard />,
   },
@@ -27,10 +33,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId="541785145737-n1a0n0e914ipg2ug6oliop4ro19f78q2.apps.googleusercontent.com">
-      <Nav />
-      <RouterProvider router={router} />
-    </GoogleOAuthProvider>
+    <Nav />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
