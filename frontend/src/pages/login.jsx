@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 
@@ -48,14 +49,21 @@ export default function Login() {
     console.log(error);
   };
 
+  const handle_facebook_login = () => {
+    console.log("facebook login");
+    window.location.href = "https://www.facebook.com/v19.0/dialog/oauth?client_id=<your-client-id>&redirect_uri=<redirect-uri>&response_type=<response_type>";
+  }
+
   return (
-    <form>
-      <input type="text" name="username" onChange={handleChange} />
-      <input type="text" name="password" onChange={handleChange} />
-      <button type="submit" onClick={handleSubmit}>
-        submit
+    <section>
+      <form>
+        <input type="text" name="username" onChange={handleChange} />
+        <input type="text" name="password" onChange={handleChange} />
+        <button type="submit" onClick={handleSubmit}>
+          submit
       </button>
-      <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
     </form>
+    <button type="submit" onClick={handle_facebook_login}>Login with facebook</button>
+    </section>
   );
 }
